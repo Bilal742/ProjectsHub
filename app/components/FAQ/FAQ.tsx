@@ -73,7 +73,7 @@ export default function FAQ() {
   });
 
   return (
-    <section className="relative py-24 px-4 md:px-8 lg:px-16 overflow-hidden" ref={containerRef}>
+    <section className="relative py-30 px-4 md:px-8 lg:px-16 overflow-hidden" ref={containerRef}>
       {/* Decorative Elements */}
       {/* <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#FFFF80] to-transparent" /> */}
       <div className="absolute -top-40 -right-40 w-80 h-80 rounded-full bg-[#FFD166]/10 blur-3xl" />

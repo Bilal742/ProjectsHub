@@ -138,9 +138,9 @@ export default function ProjectCard({ project, index = 0, isFeatured = true, sho
           
           {/* Difficulty Badge */}
           <div className="absolute top-4 right-4 z-20">
-            <div className={`px-3 py-1.5 rounded-full text-xs font-semibold text-white shadow-lg bg-gradient-to-r ${getDifficultyColor(project.difficulty)}`}>
+            {/* <div className={`px-3 py-1.5 rounded-full text-xs font-semibold text-white shadow-lg bg-gradient-to-r ${getDifficultyColor(project.difficulty)}`}>
               {project.difficulty || 'Intermediate'}
-            </div>
+            </div> */}
           </div>
 
           {/* Like Button */}
@@ -288,7 +288,7 @@ export default function ProjectCard({ project, index = 0, isFeatured = true, sho
                   }}
                 >
                   <FiExternalLink className="w-4 h-4" />
-                  Live Preview
+                  Demo
                 </motion.a>
               )}
 
@@ -307,7 +307,7 @@ export default function ProjectCard({ project, index = 0, isFeatured = true, sho
                   }}
                 >
                   <FiGithub className="w-4 h-4" />
-                  Source Code
+                   Code
                 </motion.a>
               )}
             </div>

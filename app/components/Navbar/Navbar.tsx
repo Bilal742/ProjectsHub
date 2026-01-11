@@ -30,8 +30,13 @@ export default function Navbar() {
             </Link>
           </li>
           <li>
-            <Link href="/projects" className="hover:opacity-80 transition-opacity">
+            <Link href="/about" className="hover:opacity-80 transition-opacity">
               About
+            </Link>
+          </li>
+          <li>
+            <Link href="/faq" className="hover:opacity-80 transition-opacity">
+              FAQ
             </Link>
           </li>
           <li>

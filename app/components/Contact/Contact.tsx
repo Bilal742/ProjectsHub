@@ -51,15 +51,13 @@ export default function Contact() {
     ];
 
     return (
-        <section className="relative min-h-screen flex items-center justify-center px-4 md:px-8 py-20 overflow-hidden">
-            {/* Background Elements */}
+        <section className="relative min-h-screen flex items-center justify-center px-4 md:px-8 py-30 overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-white via-white to-[#FFFF80]/10" />
-            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#FFFF80] to-transparent" />
+            {/* <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#FFFF80] to-transparent" /> */}
 
             <div className="absolute -top-40 -right-40 w-80 h-80 rounded-full bg-[#FFD166]/10 blur-3xl" />
             <div className="absolute -bottom-40 -left-40 w-80 h-80 rounded-full bg-[#06D6A0]/10 blur-3xl" />
 
-            {/* Floating Elements */}
             <div className="absolute top-20 left-10 md:left-20">
                 <motion.div
                     animate={{ y: [0, -10, 0] }}

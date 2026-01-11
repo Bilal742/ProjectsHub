@@ -43,7 +43,7 @@ export default function Features() {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   return (
-    <section className="relative py-24 px-4 md:px-8 lg:px-16 bg-gradient-to-b from-white to-[#213448]/[0.03] overflow-hidden">
+    <section className="relative py-30 px-4 md:px-8 lg:px-16 bg-gradient-to-b from-white to-[#213448]/[0.03] overflow-hidden">
       {/* Background Elements */}
       {/* <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#FFFF80] via-[#FFD166] to-[#EF476F]" /> */}
       
