@@ -45,7 +45,7 @@ export default function HeroSection() {
 
 
     return (
-        <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 py-20">
+        <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 py-40">
             {/* Animated Background Elements */}
             <div className="absolute inset-0 z-0">
                 {/* Gradient Background */}

@@ -1,167 +1,88 @@
-#clip {
-  --color: #213448;
-  border-color: var(--color);
-  clip-path: polygon(
-    30% 0%, 70% 0%, 100% 30%, 100% 70%,
-    70% 100%, 30% 100%, 0% 70%, 0% 30%
-  );
+/* From Uiverse.io by cssbuttons-io */ 
+.learn-more {
+ position: relative;
+ display: inline-block;
+ cursor: pointer;
+ outline: none;
+ border: 0;
+ vertical-align: middle;
+ text-decoration: none;
+ background: transparent;
+ padding: 0;
+ font-size: inherit;
+ font-family: inherit;
 }
 
-.arrow {
-  background-color: #213448;
-  transition: 0.2s;
+.learn-more.learn-more {
+ width: 12rem;
+ height: auto;
 }
 
-#leftArrow {
-  left: -13.5%;
-  clip-path: polygon(100% 0, 100% 100%, 0 50%);
+.learn-more.learn-more .circle {
+ transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+ position: relative;
+ display: block;
+ margin: 0;
+ width: 3rem;
+ height: 3rem;
+ background: #282936;
+ border-radius: 1.625rem;
 }
 
-#rightArrow {
-  left: 102%;
-  clip-path: polygon(100% 49%, 0 0, 0 100%);
+.learn-more.learn-more .circle .icon {
+ transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+ position: absolute;
+ top: 0;
+ bottom: 0;
+ margin: auto;
+ background: #fff;
 }
 
-.corner {
-  position: absolute;
-  width: 4em;
-  height: 4em;
-  background-color: #213448;
-  box-shadow: inset 1px 1px 8px #213448;
-  transform: rotate(45deg);
-  transition: 0.2s;
+.learn-more.learn-more .circle .icon.arrow {
+ transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+ left: 0.625rem;
+ width: 1.125rem;
+ height: 0.125rem;
+ background: none;
 }
 
-#leftTop { top: -1.96em; left: -3em; }
-#rightTop { top: -1.98em; left: 91%; }
-#leftBottom { top: 2.1em; left: -2.15em; }
-#rightBottom { top: 45%; left: 88%; }
-
-button:hover .corner {
-  transform: scale(1.25) rotate(45deg);
+.learn-more.learn-more .circle .icon.arrow::before {
+ position: absolute;
+ content: "";
+ top: -0.29rem;
+ right: 0.0625rem;
+ width: 0.625rem;
+ height: 0.625rem;
+ border-top: 0.125rem solid #fff;
+ border-right: 0.125rem solid #fff;
+ transform: rotate(45deg);
 }
 
-/* button:hover #clip {
-  --color: #27c39f;
-  box-shadow: inset 0 0 32px #27c39f;
-} */
-
-button:hover #leftArrow {
-  left: 103%;
-  /* background-color: #27c39f; */
-  animation: leftArrow 0.6s infinite alternate;
+.learn-more.learn-more .button-text {
+ transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+ position: absolute;
+ top: 0;
+ left: 0;
+ right: 0;
+ bottom: 0;
+ padding: 0.75rem 0;
+ margin: 0 0 0 1.85rem;
+ color: #282936;
+ font-weight: 700;
+ line-height: 1.6;
+ text-align: center;
+ text-transform: uppercase;
 }
 
-button:hover #rightArrow {
-  left: -15%;
-  /* background-color: #27c39f; */
-  animation: rightArrow 0.6s infinite alternate;
+.learn-more:hover .circle {
+ width: 100%;
 }
 
-/* @keyframes leftArrow {
-  from { transform: translateX(0); }
-  to { transform: translateX(10px); }
+.learn-more:hover .circle .icon.arrow {
+ background: #fff;
+ transform: translate(1rem, 0);
 }
 
-@keyframes rightArrow {
-  from { transform: translateX(0); }
-  to { transform: translateX(-10px); }
-} */
-
-/* .arrow {
-  background-color: currentColor;
-  position: absolute;
-  opacity: 1;
-  transition: all 0.3s ease;
-}
-
-#leftArrow {
-  left: -10%;
-  clip-path: polygon(0 50%, 100% 0, 100% 100%);
-}
-
-#rightArrow {
-  right: -10%;
-  clip-path: polygon(0 0, 100% 50%, 0 100%);
-}
-
-button:hover #leftArrow {
-  left: -15%;
-}
-
-button:hover #rightArrow {
-  right: -15%;
-} */
-
-.corner {
-  position: absolute;
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: currentColor;
-  opacity: 0.7;
-}
-
-#leftTop {
-  top: -6px;
-  left: -6px;
-}
-
-#rightTop {
-  top: -6px;
-  right: -6px;
-}
-
-#rightBottom {
-  bottom: -6px;
-  right: -6px;
-}
-
-#leftBottom {
-  bottom: -6px;
-  left: -6px;
-}
-
-@media (max-width: 768px) {
-  .arrow {
-    width: 8%;
-  }
-  
-  button:hover #leftArrow {
-    left: -12%;
-  }
-  
-  button:hover #rightArrow {
-    right: -12%;
-  }
-
-  #clip {
-    border-width: 4px !important;
-  }
-}
-
-.navbar-button {
-  position: relative;
-  z-index: 1;
-}
-
-.mobile-menu-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 9999;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: flex-end;
-}
-
-.mobile-menu-content {
-  width: 75%;
-  max-width: 384px;
-  height: 100%;
-  background: inherit;
-  padding: 5rem 1.5rem 1.5rem;
-  overflow-y: auto;
+.learn-more:hover .button-text {
+ color: #fff;
 }

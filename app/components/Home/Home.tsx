@@ -3,10 +3,12 @@
 import { useEffect, useState } from "react";
 import ProjectCard from "@/app/components/ProjectCard/ProjectCard";
 import { Project } from "@/types";
+import Link from "next/link";
 
 export default function Home() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
+  const visibleProjects = projects.slice(0, 6);
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -74,14 +76,29 @@ export default function Home() {
 
   return (
     <main className="min-h-screen">
-      <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
-        {projects.map((project, index) => (
+      <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-30">
+        {visibleProjects.map((project, index) => (
           <ProjectCard
             key={project.slug}
             project={project}
             index={index}
           />
         ))}
+
+        {projects.length > 6 && (
+          <div className="col-span-full flex justify-center mt-12">
+            <Link
+              href="/projects"
+              className="px-8 py-3 rounded-xl font-semibold transition-all duration-300"
+              style={{
+                backgroundColor: "#213448",
+                color: "white",
+              }}
+            >
+              View All Projects →
+            </Link>
+          </div>
+        )}
       </section>
     </main>
   );

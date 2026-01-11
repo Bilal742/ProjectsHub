@@ -1,12 +1,18 @@
 import React from 'react'
 import Home from './components/Home/Home'
 import HeroSection from './components/HeroSection/HeroSection'
+import FAQ from './components/FAQ/FAQ'
+import Features from './components/Features/Features'
+import Contact from './components/Contact/Contact'
 
 const page = () => {
   return (
     <div>
       <HeroSection />
       <Home />
+      <Features />
+      <FAQ />
+      <Contact />
     </div>
   )
 }

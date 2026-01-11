@@ -13,9 +13,9 @@ export default function Navbar() {
 
   return (
     <>
-      <nav 
-        style={{ color: colors.color, background: colors.background }} 
-        className="px-4 md:px-8 lg:px-16 xl:px-40 py-4 md:py-6 lg:py-8 flex justify-between items-center relative z-40"
+      <nav
+        style={{ color: colors.color, background: colors.background }}
+        className="px-4 md:px-8 lg:px-16 xl:px-40 py-4 md:py-6 lg:py-5 flex justify-between items-center z-40 shadow-xl fixed w-full"
       >
         {/* Logo */}
         <Link href="/" className="text-xl md:text-2xl font-bold">
@@ -30,7 +30,7 @@ export default function Navbar() {
             </Link>
           </li>
           <li>
-            <Link href="#About" className="hover:opacity-80 transition-opacity">
+            <Link href="/projects" className="hover:opacity-80 transition-opacity">
               About
             </Link>
           </li>
@@ -48,8 +48,8 @@ export default function Navbar() {
 
         {/* Desktop Button - Always visible on desktop */}
         <div className="hidden md:block">
-          <button
-          onClick={() => router.push("/projects")}
+          {/* <button
+          onClick={() => router.push('/projects')}
             className="cursor-pointer relative w-[10em] lg:w-[11em] h-[3.5em] lg:h-[4em] outline-none transition-all duration-100 bg-transparent border-0 text-[11px] md:text-[12px] lg:text-[13px] font-bold overflow-visible"
           >
             All Projects
@@ -61,6 +61,16 @@ export default function Navbar() {
             </div>
             <span id="leftArrow" className="arrow absolute top-[35%] w-[11%] h-[30%]"></span>
             <span id="rightArrow" className="arrow absolute top-[35%] w-[11%] h-[30%]"></span>
+          </button> */}
+          <button onClick={() => {
+            setIsMenuOpen(false);
+            router.push("/projects");
+          }}
+            className="learn-more">
+            <span className="circle" aria-hidden="true">
+              <span className="icon arrow"></span>
+            </span>
+            <span className="button-text">All Projects</span>
           </button>
         </div>
 
@@ -75,21 +85,19 @@ export default function Navbar() {
       </nav>
 
       {/* Mobile Menu Overlay */}
-      <div 
-        className={`fixed top-0 left-0 w-full h-full z-30 transition-all duration-300 ${
-          isMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"
-        }`}
+      <div
+        className={`fixed top-0 left-0 w-full h-full z-30 transition-all duration-300 ${isMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"
+          }`}
         onClick={() => setIsMenuOpen(false)}
       >
         {/* Background Overlay */}
         <div className="absolute top-0 left-0 w-full h-full bg-black/50" />
-        
+
         {/* Menu Content */}
-        <div 
+        <div
           style={{ background: colors.background }}
-          className={`absolute top-0 right-0 w-3/4 max-w-sm h-full transform transition-transform duration-300 ${
-            isMenuOpen ? "translate-x-0" : "translate-x-full"
-          }`}
+          className={`absolute top-0 right-0 w-3/4 max-w-sm h-full transform transition-transform duration-300 ${isMenuOpen ? "translate-x-0" : "translate-x-full"
+            }`}
           onClick={(e) => e.stopPropagation()}
         >
           <div className="flex flex-col items-center space-y-8 py-20 px-6 h-full overflow-y-auto">
@@ -116,36 +124,20 @@ export default function Navbar() {
             >
               GitHub
             </a>
-            
+
             {/* Mobile Button - Now clearly visible */}
             <div className="mt-12 w-full flex justify-center">
-              <button
-                className="cursor-pointer relative w-full max-w-[16em] h-[4em] outline-none transition-all duration-100 bg-transparent border-0 text-[14px] font-bold overflow-visible"
-                onClick={() => {
-                  setIsMenuOpen(false);
-                  // Add your button click handler here
-                }}
-              >
-                All Projects
-                <div id="clip" className="absolute top-0 w-full h-full overflow-hidden border-[5px] border-double shadow-[inset_0_0_15px_#195480]">
-                  <div id="leftTop" className="corner"></div>
-                  <div id="rightTop" className="corner"></div>
-                  <div id="rightBottom" className="corner"></div>
-                  <div id="leftBottom" className="corner"></div>
-                </div>
-                <span id="leftArrow" className="arrow absolute top-[35%] w-[11%] h-[30%]"></span>
-                <span id="rightArrow" className="arrow absolute top-[35%] w-[11%] h-[30%]"></span>
+              <button onClick={() => {
+                setIsMenuOpen(false);
+                router.push("/projects");
+              }}
+                className="learn-more">
+                <span className="circle" aria-hidden="true">
+                  <span className="icon arrow"></span>
+                </span>
+                <span className="button-text">All Projects</span>
               </button>
             </div>
-
-            {/* Close button for mobile */}
-            <button
-              className="md:hidden absolute top-6 right-6 text-2xl"
-              onClick={() => setIsMenuOpen(false)}
-              aria-label="Close menu"
-            >
-              <FiX />
-            </button>
           </div>
         </div>
       </div>
