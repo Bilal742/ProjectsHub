@@ -20,12 +20,41 @@
 
 // export default config;
 
+// module.exports = {
+//   theme: {
+//     extend: {
+//       lineClamp: {
+//         2: '2',
+//         3: '3',
+//       }
+//     }
+//   }
+// }
+
+// tailwind.config.js
 module.exports = {
   theme: {
     extend: {
-      lineClamp: {
-        2: '2',
-        3: '3',
+      animation: {
+        'gradient-x': 'gradient-x 3s ease infinite',
+        'shimmer': 'shimmer 2s infinite',
+      },
+      keyframes: {
+        'gradient-x': {
+          '0%, 100%': {
+            'background-position': '0% 50%'
+          },
+          '50%': {
+            'background-position': '100% 50%'
+          }
+        },
+        'shimmer': {
+          '0%': { transform: 'translateX(-100%)' },
+          '100%': { transform: 'translateX(100%)' },
+        }
+      },
+      backdropBlur: {
+        '3xl': '40px',
       }
     }
   }

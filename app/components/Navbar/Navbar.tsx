@@ -5,9 +5,11 @@ import Link from "next/link";
 import "./Navbar.css";
 import { useState } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
+import { useRouter } from "next/navigation";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const router = useRouter();
 
   return (
     <>
@@ -47,6 +49,7 @@ export default function Navbar() {
         {/* Desktop Button - Always visible on desktop */}
         <div className="hidden md:block">
           <button
+          onClick={() => router.push("/projects")}
             className="cursor-pointer relative w-[10em] lg:w-[11em] h-[3.5em] lg:h-[4em] outline-none transition-all duration-100 bg-transparent border-0 text-[11px] md:text-[12px] lg:text-[13px] font-bold overflow-visible"
           >
             All Projects

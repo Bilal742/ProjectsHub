@@ -26,3 +26,11 @@ export interface Project {
   createdAt?: Date;
   techStack: string[];
 }
+
+export interface Project {
+  id: string;         // unique identifier
+  slug: string;       // URL friendly string
+  title: string;
+  description: string;
+  techStack: string[];
+}
