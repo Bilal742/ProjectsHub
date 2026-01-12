@@ -4,6 +4,7 @@ import { useState, useRef } from "react";
 import { FiChevronDown, FiHelpCircle, FiMail, FiMessageSquare } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "framer-motion";
+import Link from "next/link";
 
 const faqs = [
   {
@@ -299,7 +300,7 @@ export default function FAQ() {
               whileTap={{ scale: 0.95 }}
               className="px-8 py-3 rounded-xl font-semibold bg-gradient-to-r from-[#FFFF80] to-[#FFD166] text-[#213448] shadow-lg hover:shadow-xl transition-all duration-300"
             >
-              Contact Me
+             <Link href="/contact">Contact Me</Link> 
             </motion.button>
           </div>
         </motion.div>

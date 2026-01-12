@@ -39,15 +39,15 @@ export default function Contact() {
     };
 
     const socialLinks = [
-        { icon: <FaGithub />, label: "GitHub", href: "https://github.com", color: "hover:bg-[#213448] hover:text-white" },
-        { icon: <FaLinkedin />, label: "LinkedIn", href: "https://linkedin.com", color: "hover:bg-[#0A66C2] hover:text-white" },
+        { icon: <FaGithub />, label: "GitHub", href: "https://github.com/Bilal742", color: "hover:bg-[#213448] hover:text-white" },
+        { icon: <FaLinkedin />, label: "LinkedIn", href: "https://www.linkedin.com/in/muhaammad-bilal/", color: "hover:bg-[#0A66C2] hover:text-white" },
         { icon: <FaTwitter />, label: "Twitter", href: "https://twitter.com", color: "hover:bg-[#1DA1F2] hover:text-white" },
     ];
 
     const contactInfo = [
-        { icon: <FiMail />, label: "Email", value: "hello@projectshub.com", href: "mailto:hello@projectshub.com" },
+        { icon: <FiMail />, label: "Email", value: "bilalusman1291@gmail.com", href: "mailto:bilalusman1291@gmail.com" },
         { icon: <FiPhone />, label: "Phone", value: "+1 (234) 567-890", href: "tel:+1234567890" },
-        { icon: <FiMapPin />, label: "Location", value: "Remote • Worldwide", href: "#" },
+        { icon: <FiMapPin />, label: "Location", value: "Karachi", href: "#" },
     ];
 
     return (
@@ -267,7 +267,7 @@ export default function Contact() {
                                     disabled={isSubmitting}
                                     whileHover={{ scale: 1.05 }}
                                     whileTap={{ scale: 0.95 }}
-                                    className="w-full py-4 rounded-xl font-semibold text-lg flex items-center justify-center gap-3 transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-70 disabled:cursor-not-allowed"
+                                    className="w-full py-4 rounded-xl font-semibold text-lg flex items-center justify-center gap-3 cursor-pointer transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-70 disabled:cursor-not-allowed"
                                     style={{
                                         background: 'linear-gradient(135deg, #213448 0%, #1a2938 100%)',
                                         color: 'white',

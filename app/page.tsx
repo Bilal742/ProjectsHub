@@ -5,6 +5,7 @@ import FAQ from './components/FAQ/FAQ'
 import Features from './components/Features/Features'
 import Contact from './components/Contact/Contact'
 import About from './components/About/About'
+// https://projectshubb.vercel.app/
 
 const page = () => {
   return (

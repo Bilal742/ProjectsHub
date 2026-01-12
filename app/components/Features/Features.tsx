@@ -3,6 +3,7 @@
 import { FiCode, FiLayers, FiGithub, FiTrendingUp, FiChevronRight } from "react-icons/fi";
 import { motion } from "framer-motion";
 import { useState } from "react";
+import Link from "next/link";
 
 const features = [
   {
@@ -237,7 +238,7 @@ export default function Features() {
               whileTap={{ scale: 0.95 }}
               className="px-8 py-3 rounded-xl font-semibold text-white shadow-lg transition-all duration-300 bg-gradient-to-r from-[#213448] to-[#1a2938] hover:shadow-xl"
             >
-              Explore All Projects
+             <Link href="/projects">Explore All Projects</Link> 
             </motion.button>
             <motion.button
               whileHover={{ scale: 1.05 }}
@@ -245,7 +246,7 @@ export default function Features() {
               className="px-8 py-3 rounded-xl font-semibold border-2 transition-all duration-300 bg-white hover:bg-[#FFFF80]/10"
               style={{ borderColor: '#213448', color: '#213448' }}
             >
-              View GitHub Profile
+              <Link href="https://github.com/Bilal742" target="blank">View GitHub Profile</Link>
             </motion.button>
           </div>
         </motion.div>

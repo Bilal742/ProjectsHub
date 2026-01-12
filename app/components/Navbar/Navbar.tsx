@@ -40,14 +40,15 @@ export default function Navbar() {
             </Link>
           </li>
           <li>
-            <a
+            {/* <a
               href="https://github.com/Bilal742"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:opacity-80 transition-opacity"
             >
               GitHub
-            </a>
+            </a> */}
+            <Link href="/contact">Contact</Link>
           </li>
         </ul>
 

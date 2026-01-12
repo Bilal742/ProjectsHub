@@ -289,7 +289,7 @@ export default function About() {
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-end">
                 <motion.a
-                  href="#projects"
+                  href="/projects"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="px-8 py-3 rounded-xl font-semibold bg-gradient-to-r from-[#FFFF80] to-[#FFD166] text-[#213448] hover:shadow-xl transition-shadow"
@@ -297,7 +297,7 @@ export default function About() {
                   Explore Projects
                 </motion.a>
                 <motion.a
-                  href="#contact"
+                  href="/contact"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="px-8 py-3 rounded-xl font-semibold border-2 border-[#213448]/20 text-[#213448] hover:border-[#213448]/40 hover:bg-[#213448]/5 transition-all"
@@ -310,7 +310,7 @@ export default function About() {
         </motion.div>
 
         {/* Final Quote */}
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 1, delay: 1.2 }}
@@ -321,7 +321,7 @@ export default function About() {
             we shape the digital world around us."
           </div>
           <div className="mt-6 text-[#213448]/40">— ProjectsHub Philosophy</div>
-        </motion.div>
+        </motion.div> */}
       </div>
     </section>
   );
