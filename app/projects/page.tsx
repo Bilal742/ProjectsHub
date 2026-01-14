@@ -10,25 +10,55 @@ export default function Page() {
 
   useEffect(() => {
     const fetchProjects = async () => {
-      const res = await fetch(
-        "https://api.github.com/repos/Bilal742/JavaScript-projects/contents/projects"
-      );
-      const data = await res.json();
+      try {
+        const res = await fetch(
+          "https://api.github.com/repos/Bilal742/JavaScript-projects/contents/projects"
+        );
+        const data = await res.json();
 
-      const dirs = data.filter((item: any) => item.type === "dir");
+        const dirs = data.filter((item: any) => item.type === "dir");
 
-      const mapped: Project[] = dirs.map((item: any) => ({
-        slug: item.name,
-        title: item.name.replace(/-/g, " "),
-        description: "No description available",
-        image: `https://opengraph.githubassets.com/1/Bilal742/${item.name}`,
-        live: `https://bilal742.github.io/JavaScript-projects/projects/${item.name}/index.html`,
-        github: item.html_url,
-        techStack: [],
-      }));
+        const mapped: Project[] = await Promise.all(
+          dirs.map(async (item: any) => {
+            let meta: any = {};
 
-      setProjects(mapped);
-      setLoading(false);
+            try {
+              const metaRes = await fetch(
+                `https://raw.githubusercontent.com/Bilal742/JavaScript-projects/main/projects/${item.name}/meta.json`
+              );
+
+              if (metaRes.ok) {
+                meta = await metaRes.json();
+              }
+            } catch (error) {
+              console.error("Meta fetch failed for", item.name);
+            }
+
+            return {
+              slug: item.name,
+              title:
+                meta.title ||
+                item.name.replace(/-/g, " "),
+              description:
+                meta.description ||
+                "No description available",
+              image:
+                meta.image ||
+                `https://opengraph.githubassets.com/1/Bilal742/${item.name}`,
+              live: `https://bilal742.github.io/JavaScript-projects/projects/${item.name}/index.html`,
+              github: item.html_url,
+              techStack: meta.techStack || [],
+              features: meta.features || [],
+            };
+          })
+        );
+
+        setProjects(mapped);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
     };
 
     fetchProjects();
@@ -38,8 +68,6 @@ export default function Page() {
 
   return (
     <div className="p-30">
-      {/* <h1 className="text-3xl font-bold mb-6">My Projects</h1> */}
-
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
         {projects.map((project, index) => (
           <ProjectCard

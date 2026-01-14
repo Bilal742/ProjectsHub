@@ -37,7 +37,7 @@ export default function Footer() {
     {
       icon: <FiLinkedin />,
       label: "LinkedIn",
-      href: "https://linkedin.com/in/yourprofile",
+      href: "https://www.linkedin.com/in/muhaammad-bilal/",
       color: "hover:bg-[#0A66C2] hover:text-white",
       tooltip: "Connect professionally"
     },
@@ -58,10 +58,10 @@ export default function Footer() {
   ];
 
   const quickLinks = [
-    { label: "Projects", href: "#projects" },
-    { label: "About", href: "#about" },
-    { label: "Skills", href: "#skills" },
-    { label: "Contact", href: "#contact" }
+    { label: "Projects", href: "/projects" },
+    { label: "About", href: "/about" },
+    { label: "FAQ", href: "/faq" },
+    { label: "Contact", href: "/contact" }
   ];
 
   const techStack = [
@@ -92,10 +92,10 @@ export default function Footer() {
       <footer className="relative bg-gradient-to-b from-[#213448] to-[#1a2938] text-white overflow-hidden">
         {/* Background Elements */}
         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#FFFF80] via-[#FFD166] to-[#EF476F]" />
-        
+
         <div className="absolute top-20 left-10 w-32 h-32 rounded-full bg-[#FFFF80]/5 blur-3xl" />
         <div className="absolute bottom-20 right-10 w-40 h-40 rounded-full bg-[#06D6A0]/5 blur-3xl" />
-        
+
         {/* Animated Particles */}
         {[...Array(8)].map((_, i) => (
           <motion.div
@@ -143,12 +143,12 @@ export default function Footer() {
                   <div className="h-1 w-12 mt-2 rounded-full bg-gradient-to-r from-[#FFFF80] to-[#FFD166]" />
                 </div>
               </div>
-              
+
               <p className="text-white/80 leading-relaxed">
-                Transforming ideas into reality through code. Building innovative solutions 
+                Transforming ideas into reality through code. Building innovative solutions
                 that make a difference, one project at a time.
               </p>
-              
+
               {/* Visit Counter */}
               <div className="flex items-center gap-3 p-4 rounded-xl bg-white/5 backdrop-blur-sm">
                 <div className="p-2 rounded-lg bg-gradient-to-br from-[#FFFF80] to-[#FFD166]">
@@ -232,10 +232,10 @@ export default function Footer() {
                 <span className="text-[#EF476F]">@</span> Let's Connect
               </h3>
               <p className="text-white/80">
-                Interested in collaboration or have a project in mind? 
+                Interested in collaboration or have a project in mind?
                 Reach out through any platform.
               </p>
-              
+
               {/* Social Links with Tooltips */}
               <div className="grid grid-cols-2 gap-3">
                 {socialLinks.map((social, index) => (
@@ -256,7 +256,7 @@ export default function Footer() {
                       {social.icon}
                     </div>
                     <span className="text-sm font-medium">{social.label}</span>
-                    
+
                     {/* Tooltip */}
                     <div className="absolute -top-10 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none">
                       <div className="px-3 py-2 rounded-lg bg-gradient-to-r from-[#213448] to-[#1a2938] text-xs whitespace-nowrap shadow-xl">
@@ -285,8 +285,8 @@ export default function Footer() {
               <div className="flex items-center gap-2 text-white/60">
                 <FiCoffee className="w-4 h-4" />
                 <span>
-                  &copy; {currentYear} ProjectsHub. Crafted with 
-                  <FiHeart className="inline mx-1 w-3 h-3 text-[#EF476F] fill-[#EF476F]" /> 
+                  &copy; {currentYear} ProjectsHub. Crafted with
+                  <FiHeart className="inline mx-1 w-3 h-3 text-[#EF476F] fill-[#EF476F]" />
                   by Bilal.
                 </span>
               </div>
