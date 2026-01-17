@@ -1,6 +1,6 @@
 "use client";
 
-import { FiGithub, FiLinkedin, FiTwitter, FiMail, FiHeart, FiArrowUp, FiCode, FiCoffee, FiEye } from "react-icons/fi";
+import { FiGithub, FiLinkedin, FiTwitter, FiMail, FiHeart, FiArrowUp, FiCode, FiCoffee, FiEye, FiCheck } from "react-icons/fi";
 import { FaReact, FaNodeJs } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
@@ -9,9 +9,10 @@ export default function Footer() {
   const [showBackToTop, setShowBackToTop] = useState(false);
   const [currentYear] = useState(new Date().getFullYear());
   const [visitCount, setVisitCount] = useState(() => {
-    // Simulate visit count
     return Math.floor(Math.random() * 1000) + 100;
   });
+  const [isSubscribed, setIsSubscribed] = useState(false);
+  const [email, setEmail] = useState("");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,6 +25,27 @@ export default function Footer() {
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleSubscribe = (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!email.trim()) {
+      alert('Please enter your email address');
+      return;
+    }
+
+    // Here you would typically send the email to your backend
+    console.log('Subscribed email:', email);
+    
+    // Show success message
+    alert(`Thank you for subscribing with: ${email}`);
+    
+    // Mark as subscribed
+    setIsSubscribed(true);
+    
+    // Clear the email input
+    setEmail("");
   };
 
   const socialLinks = [
@@ -44,14 +66,14 @@ export default function Footer() {
     {
       icon: <FiTwitter />,
       label: "Twitter",
-      href: "https://twitter.com/yourhandle",
+      href: "https://twitter.com/",
       color: "hover:bg-[#1DA1F2] hover:text-white",
       tooltip: "Follow updates"
     },
     {
       icon: <FiMail />,
       label: "Email",
-      href: "mailto:hello@projectshub.com",
+      href: "mailto:bilalusman1291@gmail.com",
       color: "hover:bg-[#FFFF80] hover:text-[#213448]",
       tooltip: "Send email"
     }
@@ -295,32 +317,49 @@ export default function Footer() {
               </p>
             </motion.div>
 
-            {/* Newsletter Signup */}
-            <motion.form
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.5 }}
-              viewport={{ once: true }}
-              className="flex gap-2"
-              onSubmit={(e) => {
-                e.preventDefault();
-                alert('Thanks for subscribing!');
-              }}
-            >
-              <input
-                type="email"
-                placeholder="Subscribe for updates"
-                className="px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:border-[#FFFF80] min-w-[200px]"
-              />
-              <motion.button
-                type="submit"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-6 py-3 rounded-lg bg-gradient-to-r from-[#FFFF80] to-[#FFD166] text-[#213448] font-semibold hover:shadow-lg transition-shadow"
+            {/* Newsletter Signup - Show only if not subscribed */}
+            {!isSubscribed ? (
+              <motion.form
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 0.5 }}
+                viewport={{ once: true }}
+                className="flex gap-2"
+                onSubmit={handleSubscribe}
               >
-                Subscribe
-              </motion.button>
-            </motion.form>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Enter your email"
+                  className="px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:border-[#FFFF80] min-w-[200px]"
+                  required
+                />
+                <motion.button
+                  type="submit"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="px-6 py-3 rounded-lg bg-gradient-to-r from-[#FFFF80] to-[#FFD166] text-[#213448] font-semibold hover:shadow-lg transition-shadow"
+                >
+                  Subscribe
+                </motion.button>
+              </motion.form>
+            ) : (
+              // Show success message when subscribed
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="flex items-center gap-3 px-6 py-3 rounded-lg bg-gradient-to-r from-[#06D6A0]/20 to-[#06D6A0]/10 border border-[#06D6A0]/30"
+              >
+                <div className="p-2 rounded-full bg-[#06D6A0]">
+                  <FiCheck className="w-4 h-4 text-white" />
+                </div>
+                <div>
+                  <div className="font-semibold text-[#06D6A0]">Subscribed!</div>
+                  <div className="text-sm text-white/70">Thank you for joining our newsletter</div>
+                </div>
+              </motion.div>
+            )}
           </div>
         </div>
 

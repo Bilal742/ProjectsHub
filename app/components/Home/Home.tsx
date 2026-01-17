@@ -8,6 +8,7 @@ import Link from "next/link";
 export default function Home() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
+
   const visibleProjects = projects.slice(0, 6);
 
   useEffect(() => {
@@ -22,36 +23,33 @@ export default function Home() {
 
         const mapped: Project[] = await Promise.all(
           dirs.map(async (item: any) => {
+            let meta: any = {};
+
             try {
               const metaRes = await fetch(
                 `https://raw.githubusercontent.com/Bilal742/JavaScript-projects/main/projects/${item.name}/meta.json`
               );
+              if (metaRes.ok) meta = await metaRes.json();
+            } catch { }
 
-              const meta = metaRes.ok ? await metaRes.json() : {};
+            const image =
+              meta.image
+                ? meta.image.startsWith("http")
+                  ? meta.image
+                  : `https://raw.githubusercontent.com/Bilal742/JavaScript-projects/main/projects/${item.name}/${meta.image.replace("./", "")}`
+                : `https://opengraph.githubassets.com/1/Bilal742/${item.name}`;
 
-              return {
-                slug: item.name,
-                title: meta.title ?? item.name.replace(/-/g, " "),
-                description:
-                  meta.description ?? "No description available",
-                image:
-                  meta.image ??
-                  `https://opengraph.githubassets.com/1/Bilal742/${item.name}`,
-                live: `https://bilal742.github.io/JavaScript-projects/projects/${item.name}/index.html`,
-                github: item.html_url,
-                techStack: meta.techStack ?? [],
-              };
-            } catch {
-              return {
-                slug: item.name,
-                title: item.name.replace(/-/g, " "),
-                description: "No description available",
-                image: `https://opengraph.githubassets.com/1/Bilal742/${item.name}`,
-                live: `https://bilal742.github.io/JavaScript-projects/projects/${item.name}/index.html`,
-                github: item.html_url,
-                techStack: [],
-              };
-            }
+            return {
+              slug: item.name,
+              title: meta.title ?? item.name.replace(/-/g, " "),
+              description:
+                meta.description ?? "No description available",
+              image,
+              live: `https://bilal742.github.io/JavaScript-projects/projects/${item.name}/index.html`,
+              github: item.html_url,
+              techStack: meta.techStack ?? [],
+              features: meta.features ?? [],
+            };
           })
         );
 

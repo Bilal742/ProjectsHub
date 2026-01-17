@@ -194,7 +194,7 @@ export default function HeroSection() {
                     className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16"
                 >
                     <motion.a
-                        href="#projects"
+                        href="/projects"
                         className="group relative px-8 py-4 rounded-full font-bold text-lg flex items-center gap-3 overflow-hidden"
                         style={{
                             background: colors.color,

@@ -26,36 +26,33 @@ export default function Page() {
               const metaRes = await fetch(
                 `https://raw.githubusercontent.com/Bilal742/JavaScript-projects/main/projects/${item.name}/meta.json`
               );
+              if (metaRes.ok) meta = await metaRes.json();
+            } catch {}
 
-              if (metaRes.ok) {
-                meta = await metaRes.json();
-              }
-            } catch (error) {
-              console.error("Meta fetch failed for", item.name);
-            }
+            const image =
+              meta.image
+                ? meta.image.startsWith("http")
+                  ? meta.image
+                  : `https://raw.githubusercontent.com/Bilal742/JavaScript-projects/main/projects/${item.name}/${meta.image.replace("./", "")}`
+                : `https://opengraph.githubassets.com/1/Bilal742/${item.name}`;
 
             return {
               slug: item.name,
-              title:
-                meta.title ||
-                item.name.replace(/-/g, " "),
+              title: meta.title ?? item.name.replace(/-/g, " "),
               description:
-                meta.description ||
-                "No description available",
-              image:
-                meta.image ||
-                `https://opengraph.githubassets.com/1/Bilal742/${item.name}`,
+                meta.description ?? "No description available",
+              image,
               live: `https://bilal742.github.io/JavaScript-projects/projects/${item.name}/index.html`,
               github: item.html_url,
-              techStack: meta.techStack || [],
-              features: meta.features || [],
+              techStack: meta.techStack ?? [],
+              features: meta.features ?? [],
             };
           })
         );
 
         setProjects(mapped);
-      } catch (err) {
-        console.error(err);
+      } catch (error) {
+        console.error(error);
       } finally {
         setLoading(false);
       }

@@ -2,40 +2,93 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import { FiSend, FiMail, FiPhone, FiMapPin, FiCheck, FiUser, FiMessageSquare } from "react-icons/fi";
+import { FiSend, FiMail, FiPhone, FiMapPin, FiCheck, FiUser, FiMessageSquare, FiBriefcase } from "react-icons/fi";
 import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
 
 export default function Contact() {
     const [formData, setFormData] = useState({
         name: "",
         email: "",
+        phone: "",
+        service: "",
+        subject: "",
         message: "",
     });
 
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSubmitted, setIsSubmitted] = useState(false);
+    const [error, setError] = useState<string | null>(null);
     const [activeField, setActiveField] = useState<string | null>(null);
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
+        if (error) setError(null); // Clear error when user starts typing
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsSubmitting(true);
+        setError(null);
 
-        // Simulate API call
-        await new Promise(resolve => setTimeout(resolve, 1500));
+        try {
+            const response = await fetch('https://formsubmit.co/ajax/bilalusman1291@gmail.com', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: formData.name,
+                    email: formData.email,
+                    phone: formData.phone,
+                    subject: formData.subject || 'New Contact Form Submission',
+                    message: formData.message,
+                    service: formData.service,
+                    _subject: `New Message from projectsHub website Contact`,
+                    _template: 'table',
+                    _autoresponse: `Hi ${formData.name},\n\nThank you for contacting me! I've received your message and will get back to you within 24 hours.\n\nHere's what you sent:\nName: ${formData.name}\nEmail: ${formData.email}${formData.phone ? `\nPhone: ${formData.phone}` : ''}${formData.service ? `\nService: ${formData.service}` : ''}${formData.subject ? `\nSubject: ${formData.subject}` : ''}\nMessage: ${formData.message}\n\nBest regards,\nMuhammad Bilal`
+                })
+            });
 
-        console.log('Message sent:', formData);
-        setIsSubmitting(false);
-        setIsSubmitted(true);
-
-        // Reset form after 3 seconds
-        setTimeout(() => {
-            setFormData({ name: "", email: "", message: "" });
-            setIsSubmitted(false);
-        }, 3000);
+            const result = await response.json();
+            
+            if (result.success) {
+                // Reset form
+                setFormData({
+                    name: "",
+                    email: "",
+                    phone: "",
+                    service: "",
+                    subject: "",
+                    message: "",
+                });
+                setIsSubmitted(true);
+                
+                // Hide success message after 5 seconds
+                setTimeout(() => {
+                    setIsSubmitted(false);
+                }, 5000);
+            } else {
+                throw new Error('Failed to send message');
+            }
+            
+        } catch (err) {
+            console.error("Email sending failed:", err);
+            setError("Failed to send message. Please try again or use the alternative contact methods below.");
+            
+            // Fallback: Open email client with pre-filled data
+            const mailtoLink = `mailto:bilalusman1291@gmail.com?subject=${encodeURIComponent(formData.subject || 'Contact from Portfolio')}&body=${encodeURIComponent(
+                `Name: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone}\nService: ${formData.service}\n\nMessage:\n${formData.message}`
+            )}`;
+            
+            // Show fallback option to user
+            if (confirm("Email sending failed. Would you like to open your email client instead?")) {
+                window.open(mailtoLink, '_blank');
+            }
+            
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     const socialLinks = [
@@ -46,15 +99,24 @@ export default function Contact() {
 
     const contactInfo = [
         { icon: <FiMail />, label: "Email", value: "bilalusman1291@gmail.com", href: "mailto:bilalusman1291@gmail.com" },
-        { icon: <FiPhone />, label: "Phone", value: "+1 (234) 567-890", href: "tel:+1234567890" },
-        { icon: <FiMapPin />, label: "Location", value: "Karachi", href: "#" },
+        { icon: <FiPhone />, label: "Phone", value: "+92 335 2121077", href: "tel:+923352121077" },
+        { icon: <FiMapPin />, label: "Location", value: "Karachi, Pakistan", href: "https://maps.google.com/?q=Karachi,Pakistan" },
+    ];
+
+    const services = [
+        "Web Development",
+        "Frontend Development", 
+        "React Development",
+        "Next.js Development",
+        "UI/UX Design",
+        "Consultation",
+        "Other"
     ];
 
     return (
         <section className="relative min-h-screen flex items-center justify-center px-4 md:px-8 py-30 overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-white via-white to-[#FFFF80]/10" />
-            {/* <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#FFFF80] to-transparent" /> */}
-
+            
             <div className="absolute -top-40 -right-40 w-80 h-80 rounded-full bg-[#FFD166]/10 blur-3xl" />
             <div className="absolute -bottom-40 -left-40 w-80 h-80 rounded-full bg-[#06D6A0]/10 blur-3xl" />
 
@@ -180,9 +242,12 @@ export default function Contact() {
                                         <div className="w-20 h-20 rounded-full bg-white/20 flex items-center justify-center mb-6">
                                             <FiCheck className="text-4xl text-white" />
                                         </div>
-                                        <h3 className="text-2xl font-bold text-white mb-3">Message Sent!</h3>
-                                        <p className="text-white/90">
-                                            Thank you for reaching out. I'll get back to you within 24 hours.
+                                        <h3 className="text-2xl font-bold text-white mb-3">Message Sent Successfully!</h3>
+                                        <p className="text-white/90 mb-4">
+                                            Thank you for reaching out. You should receive a confirmation email shortly.
+                                        </p>
+                                        <p className="text-white/80 text-sm">
+                                            I'll get back to you within 24 hours.
                                         </p>
                                     </motion.div>
                                 )}
@@ -191,12 +256,22 @@ export default function Contact() {
                             <h3 className="text-2xl font-bold text-[#213448] mb-2">Send a Message</h3>
                             <p className="text-[#213448]/70 mb-8">Fill out the form below and I'll respond promptly.</p>
 
+                            {error && (
+                                <motion.div
+                                    initial={{ opacity: 0, y: -10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    className="mb-6 p-4 rounded-xl bg-red-50 border border-red-200 text-red-700 text-sm"
+                                >
+                                    {error}
+                                </motion.div>
+                            )}
+
                             <form onSubmit={handleSubmit} className="space-y-6">
                                 {/* Name Field */}
                                 <div className="relative">
                                     <div className="flex items-center gap-2 mb-2">
                                         <FiUser className="text-[#213448]/50" />
-                                        <label className="text-sm font-medium text-[#213448]">Your Name</label>
+                                        <label className="text-sm font-medium text-[#213448]">Your Name *</label>
                                     </div>
                                     <input
                                         type="text"
@@ -209,7 +284,7 @@ export default function Contact() {
                                         required
                                         className="w-full px-5 py-4 rounded-xl border-2 bg-white/50 backdrop-blur-sm transition-all duration-300 focus:outline-none"
                                         style={{
-                                            borderColor: activeField === 'name' ? '#FFFF80' : '#213448/20',
+                                            borderColor: activeField === 'name' ? '#FFFF80' : '#21344820',
                                             boxShadow: activeField === 'name' ? '0 0 0 3px rgba(255, 255, 128, 0.1)' : 'none'
                                         }}
                                     />
@@ -219,7 +294,7 @@ export default function Contact() {
                                 <div className="relative">
                                     <div className="flex items-center gap-2 mb-2">
                                         <FiMail className="text-[#213448]/50" />
-                                        <label className="text-sm font-medium text-[#213448]">Email Address</label>
+                                        <label className="text-sm font-medium text-[#213448]">Email Address *</label>
                                     </div>
                                     <input
                                         type="email"
@@ -232,8 +307,77 @@ export default function Contact() {
                                         required
                                         className="w-full px-5 py-4 rounded-xl border-2 bg-white/50 backdrop-blur-sm transition-all duration-300 focus:outline-none"
                                         style={{
-                                            borderColor: activeField === 'email' ? '#FFFF80' : '#213448/20',
+                                            borderColor: activeField === 'email' ? '#FFFF80' : '#21344820',
                                             boxShadow: activeField === 'email' ? '0 0 0 3px rgba(255, 255, 128, 0.1)' : 'none'
+                                        }}
+                                    />
+                                </div>
+
+                                {/* Phone Field */}
+                                <div className="relative">
+                                    <div className="flex items-center gap-2 mb-2">
+                                        <FiPhone className="text-[#213448]/50" />
+                                        <label className="text-sm font-medium text-[#213448]">Phone Number</label>
+                                    </div>
+                                    <input
+                                        type="tel"
+                                        name="phone"
+                                        placeholder="+92 335 2121077"
+                                        value={formData.phone}
+                                        onChange={handleChange}
+                                        onFocus={() => setActiveField('phone')}
+                                        onBlur={() => setActiveField(null)}
+                                        className="w-full px-5 py-4 rounded-xl border-2 bg-white/50 backdrop-blur-sm transition-all duration-300 focus:outline-none"
+                                        style={{
+                                            borderColor: activeField === 'phone' ? '#FFFF80' : '#21344820',
+                                            boxShadow: activeField === 'phone' ? '0 0 0 3px rgba(255, 255, 128, 0.1)' : 'none'
+                                        }}
+                                    />
+                                </div>
+
+                                {/* Service Selection */}
+                                <div className="relative">
+                                    <div className="flex items-center gap-2 mb-2">
+                                        <FiBriefcase className="text-[#213448]/50" />
+                                        <label className="text-sm font-medium text-[#213448]">Service Interested In</label>
+                                    </div>
+                                    <select
+                                        name="service"
+                                        value={formData.service}
+                                        onChange={handleChange}
+                                        onFocus={() => setActiveField('service')}
+                                        onBlur={() => setActiveField(null)}
+                                        className="w-full px-5 py-4 rounded-xl border-2 bg-white/50 backdrop-blur-sm transition-all duration-300 focus:outline-none appearance-none cursor-pointer"
+                                        style={{
+                                            borderColor: activeField === 'service' ? '#FFFF80' : '#21344820',
+                                            boxShadow: activeField === 'service' ? '0 0 0 3px rgba(255, 255, 128, 0.1)' : 'none'
+                                        }}
+                                    >
+                                        <option value="">Select a service</option>
+                                        {services.map((service, index) => (
+                                            <option key={index} value={service}>{service}</option>
+                                        ))}
+                                    </select>
+                                </div>
+
+                                {/* Subject Field */}
+                                <div className="relative">
+                                    <div className="flex items-center gap-2 mb-2">
+                                        <FiMessageSquare className="text-[#213448]/50" />
+                                        <label className="text-sm font-medium text-[#213448]">Subject</label>
+                                    </div>
+                                    <input
+                                        type="text"
+                                        name="subject"
+                                        placeholder="Project Inquiry or Question"
+                                        value={formData.subject}
+                                        onChange={handleChange}
+                                        onFocus={() => setActiveField('subject')}
+                                        onBlur={() => setActiveField(null)}
+                                        className="w-full px-5 py-4 rounded-xl border-2 bg-white/50 backdrop-blur-sm transition-all duration-300 focus:outline-none"
+                                        style={{
+                                            borderColor: activeField === 'subject' ? '#FFFF80' : '#21344820',
+                                            boxShadow: activeField === 'subject' ? '0 0 0 3px rgba(255, 255, 128, 0.1)' : 'none'
                                         }}
                                     />
                                 </div>
@@ -242,7 +386,7 @@ export default function Contact() {
                                 <div className="relative">
                                     <div className="flex items-center gap-2 mb-2">
                                         <FiMessageSquare className="text-[#213448]/50" />
-                                        <label className="text-sm font-medium text-[#213448]">Your Message</label>
+                                        <label className="text-sm font-medium text-[#213448]">Your Message *</label>
                                     </div>
                                     <textarea
                                         name="message"
@@ -255,7 +399,7 @@ export default function Contact() {
                                         rows={4}
                                         className="w-full px-5 py-4 rounded-xl border-2 bg-white/50 backdrop-blur-sm transition-all duration-300 focus:outline-none resize-none"
                                         style={{
-                                            borderColor: activeField === 'message' ? '#FFFF80' : '#213448/20',
+                                            borderColor: activeField === 'message' ? '#FFFF80' : '#21344820',
                                             boxShadow: activeField === 'message' ? '0 0 0 3px rgba(255, 255, 128, 0.1)' : 'none'
                                         }}
                                     />
@@ -290,7 +434,10 @@ export default function Contact() {
                             {/* Form Footer */}
                             <div className="mt-8 pt-6 border-t border-[#213448]/10 text-center">
                                 <p className="text-sm text-[#213448]/50">
-                                    Typically responds within <span className="font-semibold text-[#213448]">24 hours</span>
+                                    All messages are sent directly to <span className="font-semibold text-[#213448]">bilalusman1291@gmail.com</span>
+                                </p>
+                                <p className="text-xs text-[#213448]/30 mt-1">
+                                    Powered by FormSubmit.co
                                 </p>
                             </div>
                         </div>
