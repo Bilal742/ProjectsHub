@@ -46,7 +46,7 @@ export default function About() {
       gradient: "from-[#118AB2]/20 to-[#0A6F9C]/20",
       borderColor: "border-[#118AB2]/20"
     }
-  ];
+  ];     
 
   const techStack = [
     { icon: <FaReact />, name: "React", color: "#61DAFB" },    
