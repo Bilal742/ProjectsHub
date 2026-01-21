@@ -50,7 +50,7 @@ export default function About() {
 
   const techStack = [
     { icon: <FaReact />, name: "React", color: "#61DAFB" },
-    { icon: <SiTypescript />, name: "TypeScript", color: "#3178C6" },
+    { icon: <SiTypescript />, name: "TypeScript", color: "#3178C6" }, 
     { icon: <SiNextdotjs />, name: "Next.js", color: "#68A063" },
     { icon: <SiTailwindcss />, name: "Tailwind", color: "#38BDF8" },
     { icon: <FaGithub />, name: "GitHub", color: "#213448" },
