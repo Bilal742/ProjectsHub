@@ -44,7 +44,7 @@ export default function About() {
       title: "Global Impact",
       description: "Open-source contributions that benefit the developer community.",
       gradient: "from-[#118AB2]/20 to-[#0A6F9C]/20",
-      borderColor: "border-[#118AB2]/20"
+      borderColor: "border-[#118AB2]/20"   
     }
   ];     
 
