@@ -4,7 +4,7 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { FiCode, FiUsers, FiAward, FiTrendingUp, FiGlobe, FiLayers, FiTarget, FiStar, FiZap, FiShield } from "react-icons/fi";
 import { FaReact, FaNodeJs, FaGithub } from "react-icons/fa";
-import { SiTypescript, SiTailwindcss } from "react-icons/si";
+import { SiTypescript, SiTailwindcss, SiNextdotjs } from "react-icons/si";
 
 export default function About() {
   const containerRef = useRef(null);
@@ -51,7 +51,7 @@ export default function About() {
   const techStack = [
     { icon: <FaReact />, name: "React", color: "#61DAFB" },
     { icon: <SiTypescript />, name: "TypeScript", color: "#3178C6" },
-    { icon: <FaNodeJs />, name: "Node.js", color: "#68A063" },
+    { icon: <SiNextdotjs />, name: "Next.js", color: "#68A063" },
     { icon: <SiTailwindcss />, name: "Tailwind", color: "#38BDF8" },
     { icon: <FaGithub />, name: "GitHub", color: "#213448" },
   ];

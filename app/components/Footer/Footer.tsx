@@ -1,9 +1,10 @@
 "use client";
 
 import { FiGithub, FiLinkedin, FiTwitter, FiMail, FiHeart, FiArrowUp, FiCode, FiCoffee, FiEye, FiCheck } from "react-icons/fi";
-import { FaReact, FaNodeJs } from "react-icons/fa";
+import { FaReact } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
+import { SiNextdotjs, SiTailwindcss } from "react-icons/si";
 
 export default function Footer() {
   const [showBackToTop, setShowBackToTop] = useState(false);
@@ -29,7 +30,7 @@ export default function Footer() {
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!email.trim()) {
       alert('Please enter your email address');
       return;
@@ -37,13 +38,13 @@ export default function Footer() {
 
     // Here you would typically send the email to your backend
     console.log('Subscribed email:', email);
-    
+
     // Show success message
     alert(`Thank you for subscribing with: ${email}`);
-    
+
     // Mark as subscribed
     setIsSubscribed(true);
-    
+
     // Clear the email input
     setEmail("");
   };
@@ -88,8 +89,9 @@ export default function Footer() {
 
   const techStack = [
     { icon: <FaReact />, label: "React", color: "text-[#61DAFB]" },
-    { icon: <FaNodeJs />, label: "Node.js", color: "text-[#68A063]" },
-    { icon: <FiCode />, label: "TypeScript", color: "text-[#3178C6]" }
+    { icon: <SiNextdotjs />, label: "Next.js", color: "text-black dark:text-white" },
+    { icon: <FiCode />, label: "TypeScript", color: "text-[#3178C6]" },
+    { icon: <SiTailwindcss />, label: "Tailwind CSS", color: "text-sky-400" }
   ];
 
   return (
@@ -172,7 +174,7 @@ export default function Footer() {
               </p>
 
               {/* Visit Counter */}
-              <div className="flex items-center gap-3 p-4 rounded-xl bg-white/5 backdrop-blur-sm">
+              {/* <div className="flex items-center gap-3 p-4 rounded-xl bg-white/5 backdrop-blur-sm">
                 <div className="p-2 rounded-lg bg-gradient-to-br from-[#FFFF80] to-[#FFD166]">
                   <FiEye className="w-4 h-4 text-[#213448]" />
                 </div>
@@ -182,7 +184,7 @@ export default function Footer() {
                     {visitCount.toLocaleString()}
                   </div>
                 </div>
-              </div>
+              </div> */}
             </motion.div>
 
             {/* Quick Links */}
