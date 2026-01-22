@@ -70,7 +70,7 @@ export default function Navbar() {
           </button> */}
           <button onClick={() => {
             setIsMenuOpen(false);
-            router.push("/projects");
+            router.push("/CategoryPage");
           }}
             className="learn-more">
             <span className="circle" aria-hidden="true">

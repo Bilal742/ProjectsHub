@@ -2,8 +2,10 @@
 
 import { FiCode, FiLayers, FiGithub, FiTrendingUp, FiChevronRight } from "react-icons/fi";
 import { motion } from "framer-motion";
-import { useState } from "react";
+// import { useState } from "react";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { fetchProjects } from "@/app/utils/fetchProjects";
 
 const features = [
   {
@@ -42,12 +44,18 @@ const features = [
 
 export default function Features() {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const [projectsCount, setProjectsCount] = useState(0);
+  useEffect(() => {
+    fetchProjects().then((projects) => {
+      setProjectsCount(projects.length);
+    });
+  }, []);
 
   return (
     <section className="relative py-30 px-4 md:px-8 lg:px-16 bg-gradient-to-b from-white to-[#213448]/[0.03] overflow-hidden">
       {/* Background Elements */}
       {/* <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#FFFF80] via-[#FFD166] to-[#EF476F]" /> */}
-      
+
       <div className="absolute -top-20 -right-20 w-64 h-64 rounded-full bg-[#FFFF80]/10 blur-3xl" />
       <div className="absolute -bottom-20 -left-20 w-64 h-64 rounded-full bg-[#06D6A0]/10 blur-3xl" />
 
@@ -64,7 +72,7 @@ export default function Features() {
             <span className="w-2 h-2 rounded-full bg-[#FFFF80]" />
             <span className="text-sm font-medium text-[#213448]/70">Why Choose ProjectsHub</span>
           </div>
-          
+
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#213448] mb-6">
             Beyond Just <span className="relative inline-block">
               <span className="relative z-10">Projects</span>
@@ -76,9 +84,9 @@ export default function Features() {
               />
             </span>
           </h2>
-          
+
           <p className="text-lg md:text-xl text-[#213448]/70 max-w-3xl mx-auto leading-relaxed">
-            ProjectsHub is a living portfolio that evolves with technology — showcasing not just what I build, 
+            ProjectsHub is a living portfolio that evolves with technology — showcasing not just what I build,
             but <span className="font-semibold text-[#213448]">how</span> I build it.
           </p>
         </motion.div>
@@ -97,18 +105,17 @@ export default function Features() {
               onMouseLeave={() => setActiveIndex(null)}
               className="group relative"
             >
-              <div className={`relative bg-white rounded-3xl p-8 border-2 border-transparent transition-all duration-500 ${
-                activeIndex === index 
-                  ? 'border-opacity-100 shadow-2xl' 
+              <div className={`relative bg-white rounded-3xl p-8 border-2 border-transparent transition-all duration-500 ${activeIndex === index
+                  ? 'border-opacity-100 shadow-2xl'
                   : 'hover:border-opacity-30 shadow-lg hover:shadow-2xl'
-              }`}
-              style={{
-                borderColor: activeIndex === index ? feature.accentColor : 'transparent'
-              }}>
-                
+                }`}
+                style={{
+                  borderColor: activeIndex === index ? feature.accentColor : 'transparent'
+                }}>
+
                 {/* Gradient Corner */}
                 <div className={`absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl ${feature.color} opacity-10 rounded-tr-3xl rounded-bl-3xl transition-opacity duration-500 group-hover:opacity-20`} />
-                
+
                 {/* Animated Icon */}
                 <div className={`relative w-16 h-16 mb-6 rounded-2xl bg-gradient-to-br ${feature.color} p-4 text-white shadow-lg transform transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3`}>
                   <div className="relative z-10 text-2xl">
@@ -129,7 +136,7 @@ export default function Features() {
                 <div className="overflow-hidden">
                   <motion.div
                     initial={{ height: 0, opacity: 0 }}
-                    animate={{ 
+                    animate={{
                       height: activeIndex === index ? "auto" : 0,
                       opacity: activeIndex === index ? 1 : 0
                     }}
@@ -161,12 +168,12 @@ export default function Features() {
                   <motion.div
                     key={i}
                     className={`absolute w-2 h-2 rounded-full bg-gradient-to-r ${feature.color}`}
-                    initial={{ 
+                    initial={{
                       x: Math.random() * 100,
                       y: Math.random() * 100,
-                      opacity: 0 
+                      opacity: 0
                     }}
-                    animate={{ 
+                    animate={{
                       y: [null, -20, 0],
                       opacity: [0, 1, 0]
                     }}
@@ -197,7 +204,7 @@ export default function Features() {
         >
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {[
-              { value: "50+", label: "Projects Built" },
+              { value: `${projectsCount}+`, label: "Projects Built" },
               { value: "100%", label: "Open Source" },
               { value: "24/7", label: "Code Updates" },
               { value: "∞", label: "Learning Curve" }
@@ -238,7 +245,7 @@ export default function Features() {
               whileTap={{ scale: 0.95 }}
               className="px-8 py-3 rounded-xl font-semibold text-white shadow-lg transition-all duration-300 bg-gradient-to-r from-[#213448] to-[#1a2938] hover:shadow-xl"
             >
-             <Link href="/projects">Explore All Projects</Link> 
+              <Link href="/projects">Explore All Projects</Link>
             </motion.button>
             <motion.button
               whileHover={{ scale: 1.05 }}

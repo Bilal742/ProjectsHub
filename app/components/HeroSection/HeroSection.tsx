@@ -4,11 +4,18 @@ import { colors } from "@/constants/colors";
 import { motion } from "framer-motion";
 import { FiArrowRight, FiGithub, FiStar, FiCode } from "react-icons/fi";
 import { useEffect, useState } from "react";
+import { fetchProjects } from "@/app/utils/fetchProjects";
 
 export default function HeroSection() {
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
     const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
     const [isHovered, setIsHovered] = useState(false);
+    const [projectsCount, setProjectsCount] = useState(0);
+    useEffect(() => {
+        fetchProjects().then((projects) => {
+            setProjectsCount(projects.length);
+        });
+    }, []);
 
     useEffect(() => {
         const handleMouseMove = (e: MouseEvent) => {
@@ -112,7 +119,7 @@ export default function HeroSection() {
                     }}
                 >
                     <FiStar className="animate-pulse" />
-                    <span className="text-sm font-medium">500+ Open Source Projects</span>
+                    <span className="text-sm font-medium">{projectsCount}+ Open Source Projects</span>
                 </motion.div>
 
                 {/* Main Heading */}
@@ -159,7 +166,7 @@ export default function HeroSection() {
                     className="flex flex-wrap justify-center gap-8 mb-12"
                 >
                     {[
-                        { number: "50+", label: "Projects", icon: <FiCode /> },
+                        { number: `${projectsCount}+`, label: "Projects", icon: <FiCode /> },
                         { number: "100K+", label: "Lines of Code", icon: <FiCode /> },
                         { number: "500+", label: "GitHub Stars", icon: <FiStar /> },
                         { number: "24/7", label: "Active", icon: <FiStar /> },
@@ -299,7 +306,7 @@ export default function HeroSection() {
                                 Live Preview
                             </div>
                             <div className="text-xs opacity-70 text-white">
-                                50+ Projects Active
+                                {projectsCount}+ Projects Active
                             </div>
                         </motion.div>
                     </div>

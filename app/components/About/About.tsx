@@ -5,13 +5,21 @@ import { useRef } from "react";
 import { FiCode, FiUsers, FiAward, FiTrendingUp, FiGlobe, FiLayers, FiTarget, FiStar, FiZap, FiShield } from "react-icons/fi";
 import { FaReact, FaNodeJs, FaGithub } from "react-icons/fa";
 import { SiTypescript, SiTailwindcss, SiNextdotjs } from "react-icons/si";
+import { useEffect, useState } from "react";
+import { fetchProjects } from "@/app/utils/fetchProjects";
 
 export default function About() {
   const containerRef = useRef(null);
   const isInView = useInView(containerRef, { once: true, amount: 0.3 });
+    const [projectsCount, setProjectsCount] = useState(0);
+    useEffect(() => {
+      fetchProjects().then((projects) => {
+        setProjectsCount(projects.length);
+      });
+    }, []);
 
   const stats = [
-    { icon: <FiCode />, value: "50+", label: "Projects Built", suffix: "", color: "from-[#FFFF80] to-[#FFD166]" },
+    { icon: <FiCode />, value: `${projectsCount}+`, label: "Projects Built", suffix: "", color: "from-[#FFFF80] to-[#FFD166]" },
     { icon: <FiUsers />, value: "10K+", label: "Community Members", suffix: "", color: "from-[#06D6A0] to-[#00B894]" },
     { icon: <FiAward />, value: "100%", label: "Success Rate", suffix: "", color: "from-[#EF476F] to-[#D43A5C]" },
     { icon: <FiTrendingUp />, value: "∞", label: "Learning Growth", suffix: "", color: "from-[#118AB2] to-[#0A6F9C]" },

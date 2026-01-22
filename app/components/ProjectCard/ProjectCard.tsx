@@ -9,6 +9,7 @@ interface Props {
   project: Project;
   index?: number;
   isFeatured?: boolean;
+  viewMode?: 'grid' | 'list';
   showViewAll?: boolean;
 }
 
@@ -58,14 +59,13 @@ export default function ProjectCard({ project, index = 0, isFeatured = true, sho
 
   return (
     <>
-      {isFeatured && index === 0 && (
+      {/* {isFeatured && index === 0 && (
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
           className="col-span-full mb-16 text-center relative"
         >
-          {/* Background Elements */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-32 bg-gradient-to-r from-[#FFFF80]/20 via-transparent to-[#FFD166]/20 blur-3xl -z-10" />
           
           <div className="bg-[#213448]/5 px-4 py-2 rounded-full inline-flex items-center gap-3 px-4 py-2 rounded-full bg-gradient-to-r from-[#F4F5F6]/20 to-[#F4F5F6]/20 mb-6">
@@ -84,7 +84,6 @@ export default function ProjectCard({ project, index = 0, isFeatured = true, sho
                 initial={{ width: 0 }}
                 animate={{ width: "100%" }}
                 transition={{ duration: 1.2, delay: 0.3 }}
-                // className="absolute bottom-2 left-0 h-3 bg-gradient-to-r from-[#FFFF80]/50 via-[#FFD166]/50 to-[#EF476F]/50 -rotate-1 -z-0"
               />
             </span>
           </h1>
@@ -93,31 +92,8 @@ export default function ProjectCard({ project, index = 0, isFeatured = true, sho
             A curated collection of innovative solutions blending cutting-edge technology with elegant design. 
             Each project tells a story of problem-solving, creativity, and technical excellence.
           </p>
-
-          {/* Stats Bar */}
-          {/* <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-10 max-w-2xl mx-auto"
-          >
-            {[
-              { icon: <FiCode />, value: "50+", label: "Projects" },
-              { icon: <FiStar />, value: "100%", label: "Quality" },
-              { icon: <FiEye />, value: "10K+", label: "Views" },
-              { icon: <FiGithub />, value: "∞", label: "Open Source" },
-            ].map((stat, idx) => (
-              <div key={idx} className="text-center p-4 rounded-2xl bg-white/50 backdrop-blur-sm border border-[#213448]/10">
-                <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-[#FFFF80] to-[#FFD166] text-[#213448] mb-3">
-                  {stat.icon}
-                </div>
-                <div className="text-2xl font-bold text-[#213448]">{stat.value}</div>
-                <div className="text-sm text-[#213448]/70">{stat.label}</div>
-              </div>
-            ))}
-          </motion.div> */}
         </motion.div>
-      )}
+      )} */}
 
       <motion.div
         initial={{ opacity: 0, y: 40 }}
