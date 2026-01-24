@@ -3,8 +3,9 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { fetchProjects } from "@/app/utils/fetchProjects";
-
+import { fetchProjects, Project } from "@/app/utils/fetchProjects";
+import { recommendProjects } from "@/app/utils/recommendation";
+import ProjectCard from "@/app/components/ProjectCard/ProjectCard";
 
 const categories = [
   {
@@ -14,7 +15,7 @@ const categories = [
   },
   {
     name: "pro",
-    image: "https://placehold.co/800x600/43e97b/ffffff?text=Advanced&font=montserrat", 
+    image: "https://placehold.co/800x600/43e97b/ffffff?text=Advanced&font=montserrat",
     description: "Advanced projects for experienced developers"
   },
   {
@@ -31,9 +32,19 @@ const categories = [
 
 export default function Home() {
   const [projectsCount, setProjectsCount] = useState(0);
+  const [recommended, setRecommended] = useState<Project[]>([]);
+
   useEffect(() => {
     fetchProjects().then((projects) => {
       setProjectsCount(projects.length);
+
+      // Load user history from localStorage
+      const viewedSlugs: string[] = JSON.parse(localStorage.getItem("viewedProjects") || "[]");
+      const userHistory = projects.filter(p => viewedSlugs.includes(p.slug));
+
+      // Get recommended projects
+      const rec = recommendProjects(projects, userHistory);
+      setRecommended(rec);
     });
   }, []);
 
@@ -54,6 +65,7 @@ export default function Home() {
           </p>
         </div>
 
+        {/* Categories Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
           {categories.map((cat, index) => (
             <motion.div
@@ -62,22 +74,15 @@ export default function Home() {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              <Link
-                href={`/projects/${cat.name}`}
-                className="group block h-full"
-              >
+              <Link href={`/projects/${cat.name}`} className="group block h-full">
                 <div className="relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 h-full bg-white">
-                  {/* Image Container */}
                   <div className="relative h-56 md:h-64 overflow-hidden">
                     <img
                       src={cat.image}
                       alt={cat.name}
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
-                    {/* Gradient Overlay */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-300" />
-
-                    {/* Category Badge */}
                     <div className="absolute top-4 right-4">
                       <span className="px-3 py-1.5 bg-white/90 backdrop-blur-sm text-gray-900 text-sm font-semibold rounded-full">
                         {cat.name === "pro" ? "Advanced" : cat.name}
@@ -85,7 +90,6 @@ export default function Home() {
                     </div>
                   </div>
 
-                  {/* Content */}
                   <div className="p-5 md:p-6">
                     <div className="flex items-center justify-between mb-3">
                       <h3 className="text-xl md:text-2xl font-bold text-gray-900 capitalize">
@@ -124,7 +128,7 @@ export default function Home() {
           ))}
         </div>
 
-        {/* Optional: Stats or Additional Info */}
+        {/* Stats Section */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -138,8 +142,7 @@ export default function Home() {
             </div>
             <div className="h-12 w-px bg-gray-300" />
             <div>
-              <div className="text-3xl md:text-4xl font-bold text-gray-900">{projectsCount}
-              </div>
+              <div className="text-3xl md:text-4xl font-bold text-gray-900">{projectsCount}</div>
               <div className="text-sm md:text-base">Projects</div>
             </div>
             <div className="h-12 w-px bg-gray-300" />
@@ -147,6 +150,24 @@ export default function Home() {
               <div className="text-3xl md:text-4xl font-bold text-gray-900">Free</div>
               <div className="text-sm md:text-base">All Resources</div>
             </div>
+          </div>
+        </motion.div>
+
+        {/* Recommended Projects */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.9, duration: 0.6 }}
+          className="mt-20 max-w-7xl mx-auto"
+        >
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-8 text-center">
+            Recommended for You
+          </h2>
+          
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            {recommended.map((project, index) => (
+              <ProjectCard key={project.slug} project={project} index={index} viewMode="grid" />
+            ))}
           </div>
         </motion.div>
       </motion.div>
