@@ -3,7 +3,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { FiExternalLink, FiGithub, FiStar, FiEye, FiCode, FiCalendar, FiUsers } from "react-icons/fi";
 import { useState, useEffect } from "react";
-import { Project } from "@/types";
+import { Project } from "@/app/utils/fetchProjects";
 
 interface Props {
   project: Project;
@@ -17,17 +17,12 @@ export default function ProjectCard({ project, index = 0, isFeatured = true, sho
   const [isHovered, setIsHovered] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
-  
-  // Real project metrics
   const [daysAgo, setDaysAgo] = useState<number>(0);
   const [viewCount, setViewCount] = useState<number>(0);
 
   useEffect(() => {
-    // Calculate days since project was added (random between 1-90 days)
     const randomDays = Math.floor(Math.random() * 90) + 1;
     setDaysAgo(randomDays);
-    
-    // Calculate view count based on days (more days = more views)
     const baseViews = Math.floor(Math.random() * 500) + 100;
     const bonusViews = Math.floor(randomDays * 15);
     setViewCount(baseViews + bonusViews);
@@ -109,7 +104,6 @@ export default function ProjectCard({ project, index = 0, isFeatured = true, sho
         onMouseLeave={() => setIsHovered(false)}
         className="group relative"
       >
-        {/* Project Card Container - Border removed on hover */}
         <div className="relative rounded-3xl overflow-hidden border-2 border-[#213448]/10 bg-gradient-to-b from-white to-white/80 backdrop-blur-sm transition-all duration-500 group-hover:shadow-xl">
           
           {/* Difficulty Badge */}

@@ -25,7 +25,7 @@ type SortOption = 'newest' | 'oldest' | 'popular' | 'alphabetical';
 export default function CategoryPage() {
   const router = useRouter();
   const params = useParams();
-  const category = params.category as string;
+  const category = params?.category as string;
   
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
@@ -43,7 +43,7 @@ export default function CategoryPage() {
         setLoading(true);
         const allProjects = await fetchProjects();
         const filtered = allProjects.filter(p => 
-          p.category.toLowerCase() === category.toLowerCase()
+          p.category?.toLowerCase() === category?.toLowerCase()
         );
         setProjects(filtered);
       } catch (error) {
@@ -53,14 +53,16 @@ export default function CategoryPage() {
       }
     };
     
-    loadProjects();
+    if (category) {
+      loadProjects();
+    }
   }, [category]);
 
   // Collect all unique tags from projects
   const allTags = useMemo(() => {
     const tags = new Set<string>();
     projects.forEach(project => {
-      project.tags?.forEach(tag => tags.add(tag));
+      project.tags?.forEach((tag: string) => tags.add(tag));
     });
     return Array.from(tags);
   }, [projects]);
@@ -73,9 +75,9 @@ export default function CategoryPage() {
     if (searchQuery) {
       const query = searchQuery.toLowerCase();
       result = result.filter(project =>
-        project.title.toLowerCase().includes(query) ||
+        project.title?.toLowerCase().includes(query) ||
         project.description?.toLowerCase().includes(query) ||
-        project.tags?.some(tag => tag.toLowerCase().includes(query))
+        project.tags?.some((tag: string) => tag.toLowerCase().includes(query))
       );
     }
 
@@ -89,13 +91,21 @@ export default function CategoryPage() {
     // Sort
     switch (sortBy) {
       case 'newest':
-        result.sort((a, b) => new Date(b.date || '').getTime() - new Date(a.date || '').getTime());
+        result.sort((a, b) => {
+          const dateA = a.date ? new Date(a.date).getTime() : 0;
+          const dateB = b.date ? new Date(b.date).getTime() : 0;
+          return dateB - dateA;
+        });
         break;
       case 'oldest':
-        result.sort((a, b) => new Date(a.date || '').getTime() - new Date(b.date || '').getTime());
+        result.sort((a, b) => {
+          const dateA = a.date ? new Date(a.date).getTime() : 0;
+          const dateB = b.date ? new Date(b.date).getTime() : 0;
+          return dateA - dateB;
+        });
         break;
       case 'alphabetical':
-        result.sort((a, b) => a.title.localeCompare(b.title));
+        result.sort((a, b) => (a.title || '').localeCompare(b.title || ''));
         break;
       case 'popular':
         result.sort((a, b) => (b.views || 0) - (a.views || 0));
@@ -107,9 +117,11 @@ export default function CategoryPage() {
 
   // Header animation
   useEffect(() => {
-    setAnimateHeader(true);
-    const timer = setTimeout(() => setAnimateHeader(false), 1000);
-    return () => clearTimeout(timer);
+    if (category) {
+      setAnimateHeader(true);
+      const timer = setTimeout(() => setAnimateHeader(false), 1000);
+      return () => clearTimeout(timer);
+    }
   }, [category]);
 
   const toggleTag = (tag: string) => {
@@ -151,7 +163,7 @@ export default function CategoryPage() {
     );
   }
 
-  if (projects.length === 0) {
+  if (!category || projects.length === 0) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 flex flex-col items-center justify-center p-6">
         <motion.div
@@ -167,12 +179,14 @@ export default function CategoryPage() {
           </div>
           
           <h1 className="text-4xl font-bold text-gray-800 mb-4">
-            Category Empty
+            {!category ? "Category Not Found" : "Category Empty"}
           </h1>
           
           <p className="text-gray-600 mb-8">
-            The <span className="font-bold text-blue-600 capitalize">{category}</span> category 
-            is waiting for its first masterpiece. Be the pioneer!
+            {!category 
+              ? "The requested category could not be found."
+              : `The ${category} category is waiting for its first masterpiece. Be the pioneer!`
+            }
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -261,7 +275,7 @@ export default function CategoryPage() {
             </motion.div>
 
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6">
-              <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent capitalize">
                 {category}
               </span>
               <br />

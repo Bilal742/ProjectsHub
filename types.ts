@@ -12,11 +12,10 @@ export interface Project {
   id: string;
   title: string;
   description: string;
-  image?: string; // ✅ Ensure this is string type
+  image?: string; 
   // live?: string;
   // github?: string;
   featured?: boolean;
-  // techStack?: string[] | string; // ✅ Allow both array and string
   stats?: {
     stars?: number;
     forks?: number;
@@ -25,12 +24,16 @@ export interface Project {
   tags?: string[];
   createdAt?: Date;
   techStack: string[];
+   date?: string;   // 👈 add this
+  views?: number; 
 }
 
 export interface Project {
-  id: string;         // unique identifier
-  slug: string;       // URL friendly string
+  id: string;       
+  slug: string;       
   title: string;
   description: string;
   techStack: string[];
+   date?: string;   // 👈 add this
+  views?: number; 
 }

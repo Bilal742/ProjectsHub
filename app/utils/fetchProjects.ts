@@ -8,6 +8,9 @@ export interface Project {
   techStack: string[];
   features: string[];
   category: string;
+  date?: string;
+  views?: number;
+  tags?: string[];
 }
 
 export const fetchProjects = async (): Promise<Project[]> => {
@@ -26,7 +29,7 @@ export const fetchProjects = async (): Promise<Project[]> => {
         try {
           const metaRes = await fetch(`https://raw.githubusercontent.com/Bilal742/JavaScript-projects/main/projects/${category}/${item.name}/meta.json`);
           if (metaRes.ok) meta = await metaRes.json();
-        } catch {}
+        } catch { }
 
         const image = meta.image
           ? meta.image.startsWith("http")
