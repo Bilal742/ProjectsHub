@@ -4,7 +4,6 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { fetchProjects, Project } from "@/app/utils/fetchProjects";
-import { recommendProjects } from "@/app/utils/recommendation";
 import ProjectCard from "@/app/components/ProjectCard/ProjectCard";
 
 const categories = [
@@ -150,24 +149,6 @@ export default function Home() {
               <div className="text-3xl md:text-4xl font-bold text-gray-900">Free</div>
               <div className="text-sm md:text-base">All Resources</div>
             </div>
-          </div>
-        </motion.div>
-
-        {/* Recommended Projects */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.9, duration: 0.6 }}
-          className="mt-20 max-w-7xl mx-auto"
-        >
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-8 text-center">
-            Recommended for You
-          </h2>
-          
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-            {recommended.map((project, index) => (
-              <ProjectCard key={project.slug} project={project} index={index} viewMode="grid" />
-            ))}
           </div>
         </motion.div>
       </motion.div>
