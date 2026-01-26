@@ -3,47 +3,41 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { fetchProjects, Project } from "@/app/utils/fetchProjects";
-import ProjectCard from "@/app/components/ProjectCard/ProjectCard";
+import { fetchProjects } from "@/app/utils/fetchProjects";
 
 const categories = [
   {
     name: "beginners",
-    image: "https://placehold.co/800x600/667eea/ffffff?text=Beginners&font=montserrat",
-    description: "Perfect starting point for newcomers"
+    image:
+      "https://placehold.co/800x600/667eea/ffffff?text=Beginners&font=montserrat",
+    description: "Perfect starting point for newcomers",
   },
   {
     name: "pro",
-    image: "https://placehold.co/800x600/43e97b/ffffff?text=Advanced&font=montserrat",
-    description: "Advanced projects for experienced developers"
+    image:
+      "https://placehold.co/800x600/43e97b/ffffff?text=Advanced&font=montserrat",
+    description: "Advanced projects for experienced developers",
   },
   {
     name: "navbar",
-    image: "https://placehold.co/800x600/f093fb/ffffff?text=Navbar&font=montserrat",
-    description: "Navigation components and patterns"
+    image:
+      "https://placehold.co/800x600/f093fb/ffffff?text=Navbar&font=montserrat",
+    description: "Navigation components and patterns",
   },
   {
     name: "cards",
-    image: "https://placehold.co/800x600/4facfe/ffffff?text=Cards&font=montserrat",
-    description: "Card layouts and UI components"
+    image:
+      "https://placehold.co/800x600/4facfe/ffffff?text=Cards&font=montserrat",
+    description: "Card layouts and UI components",
   },
 ];
 
 export default function Home() {
   const [projectsCount, setProjectsCount] = useState(0);
-  const [recommended, setRecommended] = useState<Project[]>([]);
 
   useEffect(() => {
     fetchProjects().then((projects) => {
       setProjectsCount(projects.length);
-
-      // Load user history from localStorage
-      const viewedSlugs: string[] = JSON.parse(localStorage.getItem("viewedProjects") || "[]");
-      const userHistory = projects.filter(p => viewedSlugs.includes(p.slug));
-
-      // Get recommended projects
-      const rec = recommendProjects(projects, userHistory);
-      setRecommended(rec);
     });
   }, []);
 
@@ -55,12 +49,14 @@ export default function Home() {
         transition={{ duration: 0.6 }}
         className="max-w-7xl mx-auto"
       >
+        {/* Header */}
         <div className="text-center mb-12 md:mb-16">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
             Project Categories
           </h1>
           <p className="text-gray-600 text-lg md:text-xl max-w-2xl mx-auto">
-            Explore curated collections of projects to enhance your development skills
+            Explore curated collections of projects to enhance your development
+            skills
           </p>
         </div>
 
@@ -82,8 +78,9 @@ export default function Home() {
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-300" />
+
                     <div className="absolute top-4 right-4">
-                      <span className="px-3 py-1.5 bg-white/90 backdrop-blur-sm text-gray-900 text-sm font-semibold rounded-full">
+                      <span className="px-3 py-1.5 bg-white/90 backdrop-blur-sm text-gray-900 text-sm font-semibold rounded-full capitalize">
                         {cat.name === "pro" ? "Advanced" : cat.name}
                       </span>
                     </div>
@@ -96,7 +93,6 @@ export default function Home() {
                       </h3>
                       <motion.span
                         className="text-gray-400 group-hover:text-blue-500 transition-colors"
-                        initial={{ x: 0 }}
                         whileHover={{ x: 5 }}
                       >
                         →
@@ -116,7 +112,12 @@ export default function Home() {
                           viewBox="0 0 24 24"
                           stroke="currentColor"
                         >
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M14 5l7 7m0 0l-7 7m7-7H3"
+                          />
                         </svg>
                       </span>
                     </div>
@@ -136,17 +137,27 @@ export default function Home() {
         >
           <div className="inline-flex items-center gap-8 text-gray-600 bg-white/50 backdrop-blur-sm rounded-2xl p-6 md:p-8">
             <div>
-              <div className="text-3xl md:text-4xl font-bold text-gray-900">{categories.length}</div>
+              <div className="text-3xl md:text-4xl font-bold text-gray-900">
+                {categories.length}
+              </div>
               <div className="text-sm md:text-base">Categories</div>
             </div>
+
             <div className="h-12 w-px bg-gray-300" />
+
             <div>
-              <div className="text-3xl md:text-4xl font-bold text-gray-900">{projectsCount}</div>
+              <div className="text-3xl md:text-4xl font-bold text-gray-900">
+                {projectsCount}
+              </div>
               <div className="text-sm md:text-base">Projects</div>
             </div>
+
             <div className="h-12 w-px bg-gray-300" />
+
             <div>
-              <div className="text-3xl md:text-4xl font-bold text-gray-900">Free</div>
+              <div className="text-3xl md:text-4xl font-bold text-gray-900">
+                Free
+              </div>
               <div className="text-sm md:text-base">All Resources</div>
             </div>
           </div>
