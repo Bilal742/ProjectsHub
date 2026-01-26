@@ -14,7 +14,7 @@ export interface Project {
 }
 
 export const fetchProjects = async (): Promise<Project[]> => {
-  const categories = ["beginners", "navbar", "cards", "pro"];
+  const categories = ["beginners", "navbar", "cards", "advanced"];
   const allProjects: Project[] = [];
 
   for (const category of categories) {
