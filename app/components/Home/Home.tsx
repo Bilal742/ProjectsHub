@@ -13,7 +13,7 @@ const categories = [
     description: "Perfect starting point for newcomers",
   },
   {
-    name: "pro",
+    name: "advanced",
     image:
       "https://placehold.co/800x600/43e97b/ffffff?text=Advanced&font=montserrat",
     description: "Advanced projects for experienced developers",
