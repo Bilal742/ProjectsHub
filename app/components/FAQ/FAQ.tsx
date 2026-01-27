@@ -315,7 +315,7 @@ export default function FAQ() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             {[
               { value: faqs.length, label: "Questions Answered", suffix: "+" },
-              { value: categories.length - 1, label: "Categories", suffix: "" },
+              { value: "2", label: "Categories", suffix: "" },
               { value: "24/7", label: "Support Available", suffix: "" },
               { value: "100%", label: "Satisfaction Rate", suffix: "" },
             ].map((stat, index) => (

@@ -18,18 +18,18 @@ const categories = [
       "https://placehold.co/800x600/43e97b/ffffff?text=Advanced&font=montserrat",
     description: "Advanced projects for experienced developers",
   },
-  {
-    name: "navbar",
-    image:
-      "https://placehold.co/800x600/f093fb/ffffff?text=Navbar&font=montserrat",
-    description: "Navigation components and patterns",
-  },
-  {
-    name: "cards",
-    image:
-      "https://placehold.co/800x600/4facfe/ffffff?text=Cards&font=montserrat",
-    description: "Card layouts and UI components",
-  },
+  // {
+  //   name: "navbar",
+  //   image:
+  //     "https://placehold.co/800x600/f093fb/ffffff?text=Navbar&font=montserrat",
+  //   description: "Navigation components and patterns",
+  // },
+  // {
+  //   name: "cards",
+  //   image:
+  //     "https://placehold.co/800x600/4facfe/ffffff?text=Cards&font=montserrat",
+  //   description: "Card layouts and UI components",
+  // },
 ];
 
 export default function Home() {
