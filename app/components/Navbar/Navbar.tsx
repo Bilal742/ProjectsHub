@@ -120,12 +120,29 @@ export default function Navbar() {
               Home
             </Link>
             <Link
-              href="#About"
+              href="/about"
               className="text-2xl font-medium hover:opacity-80 transition-opacity w-full text-center py-3 border-b border-gray-700"
               onClick={() => setIsMenuOpen(false)}
             >
               About
             </Link>
+
+             <Link
+              href="/faq"
+              className="text-2xl font-medium hover:opacity-80 transition-opacity w-full text-center py-3 border-b border-gray-700"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              FAQ
+            </Link>
+
+             <Link
+              href="/testimonials"
+              className="text-2xl font-medium hover:opacity-80 transition-opacity w-full text-center py-3 border-b border-gray-700"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              testimonials
+            </Link>
+            
             <a
               href="https://github.com/Bilal742"
               target="_blank"
