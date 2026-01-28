@@ -111,14 +111,13 @@ export default function About() {
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7 }}
-            className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-gradient-to-r from-[#FFFF80]/20 to-[#FFD166]/20 mb-8"
+            // className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-gradient-to-r from-[#FFFF80]/20 to-[#FFD166]/20 mb-8"
           >
-            <div className="flex gap-1">
-              <div className="w-2 h-2 rounded-full bg-[#FFFF80]" />
-              <div className="w-2 h-2 rounded-full bg-[#FFD166]" />
-              <div className="w-2 h-2 rounded-full bg-[#EF476F]" />
-            </div>
+            <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full mb-6 px-4 py-2 rounded-ful bg-[#213448]/5">
+            <div className="w-2 h-2 rounded-full bg-[#FFFF80]" />
             <span className="text-sm font-medium text-[#213448]">About ProjectsHub</span>
+            <div className="w-2 h-2 rounded-full bg-[#FFD166]" />
+          </div>
           </motion.div>
 
           <motion.h2

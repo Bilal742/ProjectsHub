@@ -37,3 +37,10 @@ export interface Project {
    date?: string;   // 👈 add this
   views?: number; 
 }
+
+export interface Testimonial {
+  id?: string;
+  name: string;
+  message: string;
+  createdAt: any;
+}

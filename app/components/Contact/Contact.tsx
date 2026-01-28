@@ -1,11 +1,20 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FiSend, FiMail, FiPhone, FiMapPin, FiCheck, FiUser, FiMessageSquare, FiBriefcase } from "react-icons/fi";
 import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
+import { fetchProjects } from "@/app/utils/fetchProjects";
+
 
 export default function Contact() {
+      const [projectsCount, setProjectsCount] = useState(0);
+        useEffect(() => {
+          fetchProjects().then((projects) => {
+            setProjectsCount(projects.length);
+          });
+        }, []);
+
     const [formData, setFormData] = useState({
         name: "",
         email: "",
@@ -336,7 +345,7 @@ export default function Contact() {
                                 </div>
 
                                 {/* Service Selection */}
-                                <div className="relative">
+                                {/* <div className="relative">
                                     <div className="flex items-center gap-2 mb-2">
                                         <FiBriefcase className="text-[#213448]/50" />
                                         <label className="text-sm font-medium text-[#213448]">Service Interested In</label>
@@ -358,7 +367,7 @@ export default function Contact() {
                                             <option key={index} value={service}>{service}</option>
                                         ))}
                                     </select>
-                                </div>
+                                </div> */}
 
                                 {/* Subject Field */}
                                 <div className="relative">
@@ -458,7 +467,7 @@ export default function Contact() {
                     {[
                         { value: "24h", label: "Avg. Response Time", color: "from-[#FFFF80] to-[#FFD166]" },
                         { value: "100%", label: "Response Rate", color: "from-[#06D6A0] to-[#00B894]" },
-                        { value: "50+", label: "Projects Completed", color: "from-[#118AB2] to-[#0A6F9C]" },
+                        { value: `${projectsCount}`, label: "Projects Completed", color: "from-[#118AB2] to-[#0A6F9C]" },
                         { value: "∞", label: "Collaboration Ready", color: "from-[#EF476F] to-[#D43A5C]" },
                     ].map((stat, index) => (
                         <div key={index} className="text-center p-6 rounded-2xl bg-white/50 backdrop-blur-sm border border-[#213448]/10">

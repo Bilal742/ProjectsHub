@@ -377,7 +377,7 @@ export default function Footer() {
             <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-gradient-to-r from-[#FFFF80]/10 to-[#FFD166]/10">
               <div className="w-2 h-2 rounded-full bg-[#FFFF80] animate-pulse" />
               <span className="text-sm">
-                🚀 Ready to collaborate? <a href="mailto:hello@projectshub.com" className="font-semibold text-[#FFFF80] hover:underline">Let's build something amazing!</a>
+                🚀 Ready to collaborate? <a href="mailto:bilalusman1291@gmail.com" className="font-semibold text-[#FFFF80] hover:underline">Let's build something amazing!</a>
               </span>
             </div>
           </div>

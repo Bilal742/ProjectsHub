@@ -5,6 +5,7 @@ import FAQ from './components/FAQ/FAQ'
 import Features from './components/Features/Features'
 import Contact from './components/Contact/Contact'
 import About from './components/About/About'
+import TestimonialList from './components/TestimonialList/TestimonialList'
 // https://projectshubb.vercel.app/
 
 const page = () => {
@@ -13,6 +14,7 @@ const page = () => {
       <HeroSection />
       <About />
       <Home />
+      <TestimonialList />
       <Features />
       <FAQ />
       <Contact />
