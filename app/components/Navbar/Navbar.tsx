@@ -140,7 +140,7 @@ export default function Navbar() {
               className="text-2xl font-medium hover:opacity-80 transition-opacity w-full text-center py-3 border-b border-gray-700"
               onClick={() => setIsMenuOpen(false)}
             >
-              testimonials
+              Testimonials
             </Link>
             
             <a
