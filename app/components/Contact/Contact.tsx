@@ -97,7 +97,7 @@ export default function Contact() {
             
         } finally {
             setIsSubmitting(false);
-        }
+        }    
     };
 
     const socialLinks = [
