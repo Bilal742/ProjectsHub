@@ -138,7 +138,7 @@ export default function Navbar() {
              <Link
               href="/testimonials"
               className="text-2xl font-medium hover:opacity-80 transition-opacity w-full text-center py-3 border-b border-gray-700"
-              onClick={() => setIsMenuOpen(false)}
+              onClick={() => setIsMenuOpen(false)} 
             >
               Testimonials
             </Link>
@@ -157,7 +157,7 @@ export default function Navbar() {
             <div className="mt-12 w-full flex justify-center">
               <button onClick={() => {
                 setIsMenuOpen(false);
-                router.push("/projects");
+                router.push("/CategoryPage");
               }}
                 className="learn-more">
                 <span className="circle" aria-hidden="true">

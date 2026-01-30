@@ -81,9 +81,10 @@ export default function Footer() {
   ];
 
   const quickLinks = [
-    { label: "Projects", href: "/projects" },
+    { label: "Projects", href: "/CategoryPage" },
     { label: "About", href: "/about" },
     { label: "FAQ", href: "/faq" },
+    { label: "Testimonials", href: "/testimonials" },
     { label: "Contact", href: "/contact" }
   ];
 

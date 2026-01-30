@@ -296,7 +296,7 @@ export default function About() {
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-end">
                 <motion.a
-                  href="/projects"
+                  href="/CategoryPage"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="px-8 py-3 rounded-xl font-semibold bg-gradient-to-r from-[#FFFF80] to-[#FFD166] text-[#213448] hover:shadow-xl transition-shadow"
